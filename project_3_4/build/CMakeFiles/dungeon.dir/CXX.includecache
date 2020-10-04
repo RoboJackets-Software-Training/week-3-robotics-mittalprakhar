@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/vagrant/RoboJackets/week-3-robotics-mittalprakhar/project_3_4/dungeon.cpp
+string
+-
+iostream
+-
+sstream
+-
+utility
+-
+iterator
+-
+numeric
+-
+algorithm
+-
+vector
+-
+graph_search.hpp
+/home/vagrant/RoboJackets/week-3-robotics-mittalprakhar/project_3_4/graph_search.hpp
+
+/home/vagrant/RoboJackets/week-3-robotics-mittalprakhar/project_3_4/graph_search.hpp
+string
+-
+iostream
+-
+vector
+-
+set
+-
+queue
+-
+stack
+-
+unistd.h
+-
+

@@ -102,18 +102,40 @@ public:
 
         while (!queue.empty())
         {
-            // IMPLEMENT CODE HERE!
-
             // Dequeued front path from queue (get and delete from queue)
             // Get path's last node (current node)
+            std::vector<Node *> path = queue.front();
+            queue.pop();
+            Node *node = path[path.size() - 1];
 
             // Leave if current node is exit node
             // DEBUGGING: Iterate though nodes in solution path and set path grid cells (grid_) to "+" and print grid (displayGrid)
+            if (node == exitNode_)
+            {
+                for (Node *n: path)
+                {
+                    grid_[n->r][n->c] = "+";
+                    displayGrid();
+                    usleep(TIME_DELAY);
+                }
+                return path;
+            }
 
             // Get all adjacent nodes of the current node (use currNode->neighbors)
             // If an adjacent has not been visited (not in visited set),
             // mark it as visited and enqueue its path (copy current path. add the adjacent node, add to queue)
             // DEBUGGING: Set visited cell in grid to "*" so they are different color when displaying
+            for (Node* n: node->neighbors)
+            {
+                if (visited.find(n) == visited.end())
+                {
+                    visited.insert(n);
+                    std::vector<Node *> newPath(path);
+                    newPath.push_back(n);
+                    queue.push(newPath);
+                    grid_[n->r][n->c] = "*";
+                }
+            }
 
             // Print grid for debugging
             if (verbose)
@@ -144,13 +166,40 @@ public:
             // Get path's last node (current node)
             // Mark current node as visited
             // DEBUGGING: Set visited cell in grid to "*" so they are different color when displaying
+            std::vector<Node *> path = stack.top();
+            stack.pop();
+            Node *node = path[path.size() - 1];
+            visited.insert(node);
+            grid_[node->r][node->c] = "*";
 
             // Leave if current node is exit node
             // DEBUGGING: Iterate though nodes in solution path and set path grid cells (grid_) to "+" and print grid (displayGrid)
+            if (node == exitNode_)
+            {
+                if (verbose)
+                {
+                    for (Node *n: path)
+                    {
+                        grid_[n->r][n->c] = "+";
+                        displayGrid();
+                        usleep(TIME_DELAY);
+                    }
+                    return path;
+                }
+            }
 
             // Get all adjacent nodes of the current node (use currNode->neighbors)
             // If an adjacent has not been visited (not in visited set),
             // enqueue its path (copy current path. add the adjacent node, add to stack)
+            for (Node *n: node->neighbors)
+            {
+                if (visited.find(n) == visited.end())
+                {
+                    std::vector<Node *> newPath(path);
+                    newPath.push_back(n);
+                    stack.push(newPath);
+                }
+            }
 
             // Print grid for debugging
             if (verbose)

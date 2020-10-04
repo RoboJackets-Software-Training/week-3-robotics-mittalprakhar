@@ -9,6 +9,8 @@
 
 #include "graph_search.hpp"
 
+
+// Converts an input line to a vector of type T
 template <class T>
 std::vector<T> getInputLine()
 {
@@ -18,14 +20,19 @@ std::vector<T> getInputLine()
     return std::vector<T>(std::istream_iterator<T>(this_line), std::istream_iterator<T>());
 }
 
+// Converts input into a grid of strings
 std::vector<std::vector<std::string>> loadGrid()
 {
+	// Takes in the number of rows/cols of grid
     int lines = getInputLine<int>()[0];
+
+    // Declares a grid and fills in each line as a vector of strings
     std::vector<std::vector<std::string>> grid;
     for (int i = 0; i < lines; i++)
     {
         grid.push_back(getInputLine<std::string>());
     }
+
     return grid;
 }
 
